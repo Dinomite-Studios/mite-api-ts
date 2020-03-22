@@ -1,0 +1,26 @@
+{
+  "name": "mite-api-ts",
+  "version": "1.0.0",
+  "description": "mite API wrapper written in TypeScript.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [
+    "mite",
+    "API",
+    "time",
+    "tracking",
+    "TypeScript"
+  ],
+  "author": "Dinomite Studios",
+  "license": "MIT",
+  "dependencies": {
+    "typed-rest-client": "^1.7.2"
+  },
+  "devDependencies": {
+    "typescript": "^2.7.2"
+  }
+}
