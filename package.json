@@ -10,10 +10,10 @@
   },
   "keywords": [
     "mite",
-    "API",
+    "api",
     "time",
     "tracking",
-    "TypeScript"
+    "typescript"
   ],
   "repository": {
     "type": "git",
