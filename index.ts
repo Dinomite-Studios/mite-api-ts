@@ -1,2 +1,2 @@
-export * from './mite-client';
-export * from './mite-models';
+export * from './lib/mite-client';
+export * from './lib/mite-models';
