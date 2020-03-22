@@ -23,20 +23,21 @@ export class MiteClient {
 
     /**
      * Creates a new instance of the mite API client.
+     * @param userAgent User agent for requests.
      * @param accountName The mite account name to connect to.
      * @param apiKey The user's mite API key.
      */
-    constructor(accountName: string, apiKey: string) {
+    constructor(userAgent: string, accountName: string, apiKey: string) {
         this.accountName = accountName;
         this.apiKey = apiKey;
-        this.client = new RestClient('mite.azure.devops.extension', 'https://corsapi.mite.yo.lk/');
+        this.client = new RestClient(userAgent, 'https://corsapi.mite.yo.lk/');
     }
 
     /**
      * Checks whether the client is authorized to make
-     * requests to the mite API.
+     * requests to the mite API by sending a test request.
      * 
-     * @returns Promise resolving to authorization state.
+     * @returns True if authorized.
      */
     public async isAuthorized(): Promise<boolean> {
         const myself = await this.getMyself();
@@ -173,22 +174,6 @@ export class MiteClient {
         }
 
         return [];
-    }
-
-    /**
-     * Gets an existing time entrz for a given work item in today's time entries.
-     * @param workItemId The work item ID to find the time entry for in today's entries.
-     */
-    public async getTimeEntryForTodayForWorkItem(workItemId: number): Promise<MiteTimeEntry | null> {
-        const todaysEntries = await this.getTimeEntriesForToday();
-        if (todaysEntries.length > 0) {
-            const index = todaysEntries.findIndex(e => e.note.includes(`${workItemId}###`));
-            if (index > -1) {
-                return todaysEntries[index];
-            }
-        }
-
-        return null;
     }
 
     /**
