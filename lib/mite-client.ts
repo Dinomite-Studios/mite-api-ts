@@ -120,7 +120,9 @@ export class MiteClient {
         headers['X-MiteAccount'] = this.accountName;
         headers['X-MiteApiKey'] = this.apiKey;
 
-        const response = await this.client.update<MiteTrackerResponse>(`${this.getTrackerEndpoint}${id}.json`, {
+        // Need to pass a resource NULL parameter to make the call a PATCH call instead
+        // of OPTIONS.
+        const response = await this.client.update<MiteTrackerResponse>(`${this.getTrackerEndpoint}${id}.json`, null, {
             additionalHeaders: headers
         });
 
