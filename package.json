@@ -10,17 +10,26 @@
   },
   "keywords": [
     "mite",
-    "API",
+    "api",
     "time",
     "tracking",
-    "TypeScript"
+    "typescript"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dinomite-Studios/mite-api-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dinomite-Studios/mite-api-ts/issues"
+  },
+  "homepage": "https://github.com/Dinomite-Studios/mite-api-ts",
   "author": "Dinomite Studios",
   "license": "MIT",
   "dependencies": {
     "typed-rest-client": "^1.7.2"
   },
   "devDependencies": {
-    "typescript": "^2.7.2"
+    "typescript": "3.1.5",
+    "@types/node": "^9.4.6"
   }
 }
