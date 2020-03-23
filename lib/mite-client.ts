@@ -2,7 +2,7 @@ import { RestClient } from "typed-rest-client/RestClient";
 import { IHeaders } from "typed-rest-client/Interfaces";
 import {
     MiteUser, MiteUserResponse, MiteAccount, MiteAccountResponse,
-    MiteTracker, MiteTrackerResponse, MiteTimeEntry, MiteTimeEntryResponse, MiteCreateTimeEntryArgs, MiteProject, MiteService, MiteUngroupedTimeEntry
+    MiteTracker, MiteTrackerResponse, MiteTimeEntry, MiteTimeEntryResponse, MiteCreateTimeEntryArgs, MiteProject, MiteService, MiteUngroupedTimeEntry, MiteServiceWrapper, MiteProjectWrapper
 } from "./mite-models";
 
 export class MiteClient {
@@ -250,12 +250,12 @@ export class MiteClient {
         headers['X-MiteAccount'] = this.accountName;
         headers['X-MiteApiKey'] = this.apiKey;
 
-        const response = await this.client.get<MiteProject[]>(`${this.getActiveProjectsEndpoint}`, {
+        const response = await this.client.get<MiteProjectWrapper[]>(`${this.getActiveProjectsEndpoint}`, {
             additionalHeaders: headers
         });
 
         if (response.statusCode === 200) {
-            return response.result!;
+            return response.result!.map(p => p.project);
         }
 
         return [];
@@ -274,12 +274,12 @@ export class MiteClient {
         headers['X-MiteAccount'] = this.accountName;
         headers['X-MiteApiKey'] = this.apiKey;
 
-        const response = await this.client.get<MiteService[]>(`${this.getActiveServicesEndpoint}`, {
+        const response = await this.client.get<MiteServiceWrapper[]>(`${this.getActiveServicesEndpoint}`, {
             additionalHeaders: headers
         });
 
         if (response.statusCode === 200) {
-            return response.result!;
+            return response.result!.map(s => s.service);
         }
 
         return [];
