@@ -84,6 +84,10 @@ export interface MiteTimeEntry {
     updated_at: Date;
 }
 
+export interface MiteProjectWrapper {
+    project: MiteProject;
+}
+
 export interface MiteProject {
     id: number;
     name: string;
@@ -97,6 +101,10 @@ export interface MiteProject {
     active_hourly_rate: string;
     created_at: Date;
     updated_at: Date;
+}
+
+export interface MiteServiceWrapper {
+    service: MiteService;
 }
 
 export interface MiteService {
