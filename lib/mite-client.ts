@@ -179,6 +179,27 @@ export class MiteClient {
     }
 
     /**
+     * Gets all existing time entries for given date.
+     * @returns Time entries, if any.
+     */
+    public async getTimeEntriesForDate(date: Date): Promise<MiteTimeEntry[]> {
+        const formattedDate = date.toISOString().split('T')[0];
+        let headers: IHeaders = {};
+        headers['X-MiteAccount'] = this.accountName;
+        headers['X-MiteApiKey'] = this.apiKey;
+        
+        const response = await this.client.get<MiteUngroupedTimeEntry[]>(`${this.getTimeEntriesEndpoint}?at=${formattedDate}`, {
+            additionalHeaders: headers,
+        });
+
+        if (response.statusCode === 200) {
+            return response.result!.map(r => r.time_entry);
+        }
+
+        return [];
+    }
+
+    /**
      * Gets the currently tracking time entry, if any.
      * @returns Currently tracking time entry, if any. Otherwise null.
      */
