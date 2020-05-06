@@ -179,7 +179,7 @@ export class MiteClient {
     }
 
     /**
-     * Gets all existing time entries for given date.
+     * Gets all existing time entries for a given date.
      * @returns Time entries, if any.
      */
     public async getTimeEntriesForDate(date: Date): Promise<MiteTimeEntry[]> {
