@@ -1,11 +1,10 @@
 {
   "name": "mite-api-ts",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "mite API wrapper written in TypeScript.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
   "keywords": [
