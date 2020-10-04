@@ -96,12 +96,12 @@ export class MiteClient {
         headers['X-MiteAccount'] = this.accountName;
         headers['X-MiteApiKey'] = this.apiKey;
 
-        const response = await this.client.get<MiteUser[]>(`${this.getUsersEndpoint}`, {
+        const response = await this.client.get<{user: MiteUser}[]>(`${this.getUsersEndpoint}`, {
             additionalHeaders: headers
         });
 
         if (response.statusCode === 200) {
-            return response.result!;
+            return response.result!.map(r => r.user);
         }
 
         return [];
