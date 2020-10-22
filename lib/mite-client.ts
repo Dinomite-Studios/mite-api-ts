@@ -20,7 +20,7 @@ export class MiteClient {
     private readonly getTimeEntriesEndpoint = 'time_entries/'
     private readonly getActiveProjectsEndpoint = 'projects.json';
     private readonly getActiveServicesEndpoint = 'services.json';
-    private readonly getUsersEndpoint = "users.json"
+    private readonly getUsersEndpoint = 'users.json';
 
     /**
      * Creates a new instance of the mite API client.
@@ -96,7 +96,7 @@ export class MiteClient {
         headers['X-MiteAccount'] = this.accountName;
         headers['X-MiteApiKey'] = this.apiKey;
 
-        const response = await this.client.get<{user: MiteUser}[]>(`${this.getUsersEndpoint}`, {
+        const response = await this.client.get<{ user: MiteUser }[]>(`${this.getUsersEndpoint}`, {
             additionalHeaders: headers
         });
 
@@ -141,7 +141,6 @@ export class MiteClient {
         headers['X-MiteAccount'] = this.accountName;
         headers['X-MiteApiKey'] = this.apiKey;
 
-        
         // Need to pass a resource NULL parameter to make the call a PATCH call instead
         // of OPTIONS.
         const response = await this.client.update<MiteTrackerResponse>(`${this.getTrackerEndpoint}${id}.json`, null, {
@@ -209,7 +208,7 @@ export class MiteClient {
         let headers: IHeaders = {};
         headers['X-MiteAccount'] = this.accountName;
         headers['X-MiteApiKey'] = this.apiKey;
-        
+
         const response = await this.client.get<MiteUngroupedTimeEntry[]>(`${this.getTimeEntriesEndpoint}?at=${formattedDate}`, {
             additionalHeaders: headers,
         });
