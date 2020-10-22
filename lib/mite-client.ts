@@ -20,6 +20,7 @@ export class MiteClient {
     private readonly getTimeEntriesEndpoint = 'time_entries/'
     private readonly getActiveProjectsEndpoint = 'projects.json';
     private readonly getActiveServicesEndpoint = 'services.json';
+    private readonly getUsersEndpoint = "users.json"
 
     /**
      * Creates a new instance of the mite API client.
@@ -86,6 +87,26 @@ export class MiteClient {
         return null;
     }
 
+    /**
+     * Gets the list of users (Requires admin priviliges).
+     * @returns List of user account or empty list in case of error.
+     */
+    public async getUsers(): Promise<MiteUser[]> {
+        let headers: IHeaders = {};
+        headers['X-MiteAccount'] = this.accountName;
+        headers['X-MiteApiKey'] = this.apiKey;
+
+        const response = await this.client.get<{user: MiteUser}[]>(`${this.getUsersEndpoint}`, {
+            additionalHeaders: headers
+        });
+
+        if (response.statusCode === 200) {
+            return response.result!.map(r => r.user);
+        }
+
+        return [];
+    }
+
     //#endregion Account / My User Endpoints
 
     //#region Tracker Endpoints
@@ -120,6 +141,7 @@ export class MiteClient {
         headers['X-MiteAccount'] = this.accountName;
         headers['X-MiteApiKey'] = this.apiKey;
 
+        
         // Need to pass a resource NULL parameter to make the call a PATCH call instead
         // of OPTIONS.
         const response = await this.client.update<MiteTrackerResponse>(`${this.getTrackerEndpoint}${id}.json`, null, {
