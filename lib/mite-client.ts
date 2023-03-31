@@ -31,13 +31,13 @@ export class MiteClient {
     constructor(userAgent: string, accountName: string, apiKey: string) {
         this.accountName = accountName;
         this.apiKey = apiKey;
-        this.client = new RestClient(userAgent, 'https://corsapi.mite.yo.lk/');
+        this.client = new RestClient(userAgent, 'https://corsapi.mite.de/');
     }
 
     /**
      * Checks whether the client is authorized to make
      * requests to the mite API by sending a test request.
-     * 
+     *
      * @returns True if authorized.
      */
     public async isAuthorized(): Promise<boolean> {
